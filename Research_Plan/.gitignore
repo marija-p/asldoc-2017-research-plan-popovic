@@ -1,0 +1,11 @@
+2017-icra-popovic.pdf
+build
+*.backup
+*.log
+*.aux
+*.blg
+*.bbl
+*.bak
+*.swp
+*.dvi
+*.out
