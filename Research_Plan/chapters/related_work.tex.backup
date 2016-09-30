@@ -9,8 +9,6 @@
 
 \hrulefill
 
-\remember{~40 references}
-
 To discuss:
 
 \subsection{UAVs for environmental monitoring}
@@ -24,12 +22,10 @@ To discuss:
 \subsection{Informative path planning}
 \begin{itemize}
  \item Motivate IPP development, define IPP
- \item Connect to static sensor placement problem
- \item 3 ingredients for model-aided path planning \unsure{Am I researching one aspect in 
-detail?} \remember{Where are my contributions?}
+ \item 3 ingredients for model-aided path planning
    \begin{itemize}
      \item Environmental model: GPs, occupancy grids
-     \item Objective function: submodularity, entropy-based/alternative formulations
+     \item Objective function: entropy-based
      \item Planning algorithm: continuous vs. discrete, adaptive vs. non-adaptive
    \end{itemize}
 \end{itemize}

@@ -1,13 +1,11 @@
-%==============================================================================
-% ETHASL - Template for student projects at the ASL
-% 2014.05: Péter Fankhauser
-% This template is based on the IMRT Latex template by Eric A. Mueller.
-%==============================================================================
-
 \documentclass[10pt,twoside,a4paper]{article}
 
 % ETHASL package
 \usepackage[]{packages/ethasl}
+\usepackage{todonotes}
+
+\newcommand{\remember}[1]{\todo[linecolor=blue,backgroundcolor=blue!25,bordercolor=blue]{#1}}
+\newcommand{\unsure}[1]{\todo[linecolor=red,backgroundcolor=red!25,bordercolor=red]{#1}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % LaTeX preamble
@@ -19,15 +17,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 
-% TODO Add your title
-\title{Title}
-%\subtitle{Subtitle}
+\title{Environmental Remote Sensing Using UAVs}
+\subtitle{\normalsize{keywords: autonomous, information-based, spatiotemporal processes, environmental 
+monitoring...}}
 
-% TODO Add name of the authors
-\student{Student Name}
+\student{Marija Popovi\'{c}}
 
-% TODO Adapt
-\proposalDate{May, 2016}
+\proposalDate{October 2016}
 \maketitle
 \pagestyle{plain}
 \pagenumbering{roman}
@@ -45,10 +41,9 @@
 \pagenumbering{arabic}
 
 \input{chapters/introduction}
-\input{chapters/objectives}
 \input{chapters/related_work}
-\input{chapters/approach}
-\input{chapters/time_schedule_and_planned_papers}
+\input{chapters/proposed_approach}
+\input{chapters/time_schedule}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Appendix

@@ -1,14 +1,12 @@
-\section{Approach}
-\label{sec:Approach}
+\section{Proposed Approach}
+\label{S:proposed_approach}
 
-Short overview of subtopics.
-
-\subsection{Subtopic 1}
+\subsection{A subtopic}
 \begin{itemize}
 	\item \emph{What approach will be used?}
 	\item \emph{Why is the approach promising?}
 	\item \emph{What are the expected results?}
 \end{itemize}
 
-\subsection{Subtopic 2}
-\ldots
+\hrulefill
+
