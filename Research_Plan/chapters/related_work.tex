@@ -9,28 +9,58 @@
 
 \hrulefill
 
-\remember{~40 references}
+\remember{Approx. 40 references}
 
 To discuss:
 
 \subsection{UAVs for environmental monitoring}
+
 \begin{itemize}
- \item General overview of applications
- \item Focus on agriculture
+ 
+ \item General overview of application areas \cite{Detweiler2015}: marine biology \cite{Hitz2015, Singh2010}, 
+gas detection \cite{Marchant2014}, signal mapping \cite{Jadidi2016}, geophysics \cite{Muscato2012}, etc.
+ 
+ \item Focus on agriculture \cite{Vivaldini2016, Anthony2014, Krienke2015} \unsure{Separate sub-section for 
+agriculture?}
+ \begin{itemize}
+   \item Example: developing target-specific weed management methods can improve yield, leading to 
+sustainability and economic gain \cite{Cardina1997}
+ \end{itemize}
+ 
+ \item There have been significant advancements. Emerging research trends \cite{Detweiler2015}: cooperative 
+robotic teams, robotic and wireless sensor network interaction, adaptive sampling, model-aided informative 
+planning
+ \item Open challenges: Real-time operation in hostile/large/dynamically varying environments, handling 
+complex maps and data, safety, cooperative robotic teams
+ \item Aim: push the boundaries of robot science and advance knowledge of the environment and its processes
+
 \end{itemize}
 
 \unsure{How generic should the following sub-sections be?}
 
 \subsection{Informative path planning}
 \begin{itemize}
- \item Motivate IPP development, define IPP
- \item Connect to static sensor placement problem
- \item 3 ingredients for model-aided path planning \unsure{Am I researching one aspect in 
+
+ \item In autonomous environmental monitoring, a key challenge is planning paths to track evolving 
+processes while respecting sensing and mobility limitations. Formally, this problem is known as informative 
+path planning (IPP) \cite{Singh2009} and has been studied extensively in the context of robotics and related 
+fields. Unlike in distance-based planning \cite{Dijkstra1959}, where the goal is to find a shortest 
+route between two locations, the paths in IPP are subject to a budget constraint which limits the number of 
+informative measurements that can be taken.
+
+ \item Connect to static sensor placement problem \cite{Krause2008}, where the aim is to find a fixed set of 
+locations for sensors to observe a given phenomenon
+
+ \item 3 ingredients for model-aided path planning \cite{Detweiler2015} \unsure{Am I researching one aspect 
+in 
 detail?} \remember{Where are my contributions?}
    \begin{itemize}
-     \item Environmental model: GPs, occupancy grids
-     \item Objective function: submodularity, entropy-based/alternative formulations
-     \item Planning algorithm: continuous vs. discrete, adaptive vs. non-adaptive
+     \item Environmental model: Gaussian Processes \cite{Rasmussen2006, Hitz2015, Binney2013} occupancy grids 
+\cite{Elfes1989}
+     \item Objective function: describe submodularity \cite{Krause2011}, discuss entropy-based vs. 
+alternative \cite{Girdhar2015} formulations
+     \item Planning algorithm: continuous \cite{Hitz2015, Hollinger2014, Marchant2014} vs. discrete 
+\cite{Binney2013}, adaptive \cite{Hitz2015} vs. non-adaptive
    \end{itemize}
 \end{itemize}
 
@@ -38,11 +68,14 @@ detail?} \remember{Where are my contributions?}
 \begin{itemize}
  \item Spatio-temporal phenomena, dynamic processes
  \item What has to be done to account for environmental model changing over time?
+ \item The usefulness of a measurement depends on the time at which it is taken
+ \item \citet{Singh2010} incorporate temporal aspects into GP covariance functions and discuss a greedy IPP 
+strategy
 \end{itemize}
 
 \unsure{Should I decide where to do further research}
 \subsection{Operational issues?}
-Localization, control issues, systems.
+Localization, control issues, systems, collision avoidance \unsure{related to Flourish WP?}.
 
 \subsection{Cooperative monitoring?}
 Consider problems with multiple agents.
