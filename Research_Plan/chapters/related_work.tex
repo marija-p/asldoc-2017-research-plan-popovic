@@ -1,81 +1,172 @@
 \section{Related Work}
 \label{S:related_work}
 
-\begin{itemize}
-	\item \emph{Which major works consider a similar context?}
-	\item \emph{Which works are addressing same/similar problem and why are these works insufficient (Gaps in state of the art)?}
-	\item \emph{Which works use a similar methodology?}
-\end{itemize}
-
-\hrulefill
-
-\remember{Approx. 40 references}
-
-To discuss:
-
-\subsection{UAVs for environmental monitoring}
+This section reviews related work in the field of informative path planning (IPP), which is the focus of 
+this thesis. Generally, IPP solvers are composed of three main ingredients: 
 
 \begin{itemize}
- 
- \item General overview of application areas \cite{Detweiler2015}: marine biology \cite{Hitz2015, Singh2010}, 
-gas detection \cite{Marchant2014}, signal mapping \cite{Jadidi2016}, geophysics \cite{Muscato2012}, etc.
- 
- \item Focus on agriculture \cite{Vivaldini2016, Anthony2014, Krienke2015} \unsure{Separate sub-section for 
-agriculture?}
- \begin{itemize}
-   \item Example: developing target-specific weed management methods can improve yield, leading to 
-sustainability and economic gain \cite{Cardina1997}
- \end{itemize}
- 
- \item There have been significant advancements. Emerging research trends \cite{Detweiler2015}: cooperative 
-robotic teams, robotic and wireless sensor network interaction, adaptive sampling, model-aided informative 
-planning
- \item Open challenges: Real-time operation in hostile/large/dynamically varying environments, handling 
-complex maps and data, safety, cooperative robotic teams
- \item Aim: push the boundaries of robot science and advance knowledge of the environment and its processes
-
+ \item Environmental model
+ \item Utility function
+ \item Planning algorithm
 \end{itemize}
 
-\unsure{How generic should the following sub-sections be?}
+The developed approach aims to examine and integrate these aspects in an scalable, modular framework 
+suitable for mapping and exploration. The sub-sections below introduce the basic problem before covering 
+existing methods of approaching each of the three components.
 
 \subsection{Informative path planning}
-\begin{itemize}
 
- \item In autonomous environmental monitoring, a key challenge is planning paths to track evolving 
-processes while respecting sensing and mobility limitations. Formally, this problem is known as informative 
-path planning (IPP) \cite{Singh2009} and has been studied extensively in the context of robotics and related 
-fields. Unlike in distance-based planning \cite{Dijkstra1959}, where the goal is to find a shortest 
-route between two locations, the paths in IPP are subject to a budget constraint which limits the number of 
-informative measurements that can be taken.
+In autonomous data collection with mobile robots, a key challenge is planning paths to track evolving 
+processes while respecting sensing and mobility constraints. This problem is known as informative 
+path planning (IPP)~\cite{Singh2009} and has been studied extensively in the context of robotics and 
+related fields. Unlike in distance-based planning, where the goal is typically to find a shortest 
+route between two locations~\cite{Dijkstra1959}, the paths in IPP are subject to a budget constraint 
+which limits the number of informative measurements that can be taken. The measures used to quantify 
+utility are often submodular~\cite{Krause2011}, meaning that the amount of information gathered in the 
+future is dependent on the prior trajectory. Hence, IPP can be viewed as procuring active 
+sensing policies to close the loop between perception and planning.
 
- \item Connect to static sensor placement problem \cite{Krause2008}, where the aim is to find a fixed set of 
-locations for sensors to observe a given phenomenon
+Closely related to active mapping are the problems of active localization~\cite{Thrun1999} and simultaneous 
+localization and mapping (SLAM)~\cite{Mu2015, Indelman2014, Bry2011}, which account for the robot's 
+state uncertainty. In general, these information-gathering tasks can be formulated as partially observable 
+Markov decision processes (POMDPs)~\cite{Kaelbling1998}, providing a general framework for uncertain 
+planning. However, the complexity of solving high-dimensional POMDP models motivates more 
+efficient solutions based on IPP. Whereas the main focus of this thesis will be active mapping with a 
+fully observable robot state, later development stages will examine the possibility of integrating 
+elements of belief space planning~\cite{Indelman2014, Indelman2015a} to relax this assumption.
 
- \item 3 ingredients for model-aided path planning \cite{Detweiler2015} \unsure{Am I researching one aspect 
-in 
-detail?} \remember{Where are my contributions?}
-   \begin{itemize}
-     \item Environmental model: Gaussian Processes \cite{Rasmussen2006, Hitz2015, Binney2013} occupancy grids 
-\cite{Elfes1989}
-     \item Objective function: describe submodularity \cite{Krause2011}, discuss entropy-based vs. 
-alternative \cite{Girdhar2015} formulations
-     \item Planning algorithm: continuous \cite{Hitz2015, Hollinger2014, Marchant2014} vs. discrete 
-\cite{Binney2013}, adaptive \cite{Hitz2015} vs. non-adaptive
-   \end{itemize}
-\end{itemize}
+A simplification of IPP, the NP-hard sensor placement task~\cite{Krause2008} addresses finding most 
+informative 
+measurement sites in a static setting. Model-aided IPP builds upon this problem by considering a sequence 
+of informed decisions a mobile agent must make to retrieve an accurate model of the environment of interest. 
+In its core, an IPP scheme thus requires a mapping framework to capture sensor measurements compactly, an 
+objective function to quantify their utility based on the map, and a planning algorithm to generate feasible 
+paths combining the map and objective.
 
-\subsection{Adaptive sampling}
-\begin{itemize}
- \item Spatio-temporal phenomena, dynamic processes
- \item What has to be done to account for environmental model changing over time?
- \item The usefulness of a measurement depends on the time at which it is taken
- \item \citet{Singh2010} incorporate temporal aspects into GP covariance functions and discuss a greedy IPP 
-strategy
-\end{itemize}
+\subsection{Environmental model}
 
-\unsure{Should I decide where to do further research}
-\subsection{Operational issues?}
-Localization, control issues, systems, collision avoidance \unsure{related to Flourish WP?}.
+In IPP, a model of the target environment is necessary to predict the utility of future 
+measurements and capture its transversability. This model can be built from previous measurements and 
+\textit{a priori} knowledge, if available, and updated incrementally by registering sensor data. Typically, 
+the map representation depends on the dimensionality of the environment as well as the nature of measurements 
+obtained. As in most other approaches, the proposed framework focuses on a probabilistic class of models to 
+account for sensor uncertainties.
 
-\subsection{Cooperative monitoring?}
-Consider problems with multiple agents.
+Occupancy grids are the most commonly-used type of map representation for spatial sensing in 
+2D with uncorrelated measurements~\cite{Elfes1989}. This model has been distinguished for its 
+efficiency and suitability for distance-based planning with search-based methods such as A* and 
+D*-Lite~\cite{Koenig2002}. ~\citet{Bourgault2002} pioneered its use for active SLAM by defining entropy as 
+an informative measure over the map, which has been extended in recent works~\cite{Carrillo2015a}.
+
+The OctoMap representation~\cite{Hornung2013} is an efficient extension of volumetric occupancy 
+mapping to 3D spaces. This framework uses an octree-based model to estimate the occupancy probabilities of 
+voxels. The probabilities are updated dynamically from vision-based sensors – for instance, stereo 
+camera imagery~\cite{Isler2016} – to yield a scalable approach to surface reconstruction while 
+distinguishing unknown areas for exploration. Several recent 
+works~\cite{Heng2015,Bircher2016,Charrow2015a,Isler2016} have considered this IPP set-up for single- 
+and multi-object volumetric reconstruction and inspection. \citet{Nelson2015} present an alternative 
+compression framework to achieve the same goal, while~\citet{Oleynikova2016} discuss the 
+benefits of encoding gradient information for local planning. The proposed thesis will pursue these research 
+directions by considering efficient 3D representations for planning both informative and dynamically 
+feasible paths.
+
+Often, information-gathering requires capturing complex processes with multiple influences. This 
+is usually the case in environmental monitoring, where natural variables, such as weather, 
+wind, and temperature, may be highly correlated. A popular probabilistic and non-parametric method of 
+handling such relationships is using Gaussian Processes (GPs)~\cite{Rasmussen2006, Hitz2015, Binney2013, 
+Krause2011, Singh2009, Singh2010, Vivaldini2016}. By applying regression in GP models, it is possible to 
+infer measurements at unobserved locations as a basis for IPP along with their associated uncertainties. The 
+field correlation and noise properties are encoded in a kernel function, whose hyperparameters can be trained 
+through supervised learning techniques~\cite{Rasmussen2006}. \citet{Singh2010} analyze several kernels 
+for modeling environmental processes. Building upon these ideas, GP regression outputs have been recently 
+used for IPP in agriculture~\cite{Vivaldini2016}, marine biology~\cite{Hitz2015, 
+Hitz2014}, and gas monitoring~\cite{Marchant2014}, among other applications.
+
+Most environmental studies, however, do not cater for dynamic feasibility with respect to the map, and only 
+consider 2D surfaces. In cluttered environments,~\citet{OCallaghan2012} extend the GP approach to construct 
+3D occupancy maps, which are used subsequently by~\citet{Yang2014} for active exploration. Open problems in 
+GP-based planning, however, remain model scalability and the integration of dense data from multiple sensors 
+for planning in more complex environments.
+
+Finally, some recent works have presented novel approaches to modeling, such as the topic 
+summarization technique of~\citet{Girdhar2015}. Although this thesis will focus on extending traditional 
+methods, it is still interesting to consider alternatives as a basis for comparison.
+
+\subsection{Utility function}
+Information-gain based mapping strategies seek to optimize a utility function reflecting the mission 
+aim and constraints. Typically, this optimization problem contains two key elements: an 
+information-theoretic objective and a mobility cost.
+
+The information-theoretic objective component is used to compute the value of the sensor inputs 
+obtained. Most informative measures for exploration in prior work are derived from Shannon's 
+entropy~\cite{Cover2006, Lim2015, Bourgault2002, Yang2014} quantifying the map uncertainty with respect to 
+its representation. To address the issue of submodularity, or diminishing returns, several methods have been 
+proposed that maximize mutual information, which predicts the impact of future sensor measurements on the 
+available map~\cite{Hitz2015, Hollinger2014, Krause2008}. \citet{Charrow2015a} and~\citet{Carrillo2015a} 
+discuss related criteria for more efficient 3D mapping. In reconstruction from imagery, it is also common to 
+simply count the number of voxels observable from a given camera position, weighting them 
+accordingly~\cite{Bircher2016, Isler2016, Heng2015}. These measures encode pure exploratory aims, with the 
+advantage of being readily available from the environmental models discussed above.
+
+It may also be desirable to tailor the objective function to a specific application for interest-based 
+planning. Several environmental monitoring works \cite{Gotovos2013, Hitz2014, Vivaldini2016} address 
+problems of active classification, where the aim is to concentrate on areas above or below target thresholds 
+within a scalar field. A related task may be to only focus on areas where sensor measurements are at a 
+maximum~\cite{Marchant2014}.
+
+The mobility component represents the physical limitations on the robot and its sensing devices. In uncertain 
+environments, these give rise to the exploration-exploitation trade-off: the 
+robot must choose whether to improve the map in its local vicinity, or try to visit other parts further away. 
+The cost, usually expressed in terms of time, distance or fuel, can be directly encoded in the utility 
+function~\cite{Charrow2015a, Bircher2016, Heng2015} or imposed as a hard budget constraint during path 
+generation~\cite{Hitz2015, Binney2013}. Methods belonging to the former class usually involve a heuristically 
+tuned parameter controlling the trade-off at hand; the cost element of \citet{Heng2015}, for example, 
+compromises between rapid exploration and detail-filling for volumetric reconstruction.
+
+The proposed thesis will contribute to the state-of-the-art by examining and evaluating various 
+utility formulations for active mapping in a modular framework.
+
+\subsection{Planning algorithm}
+In this work, the planning algorithm of IPP is treated as the unit connecting measurement sites to form a 
+feasible path in the mobile robot setting. In realistic application, the feasibility check often requires 
+that the generated path does not exceed a maximal length, obeys platform-specific constraints (eg. 
+quadrotor dynamics~\cite{Richter2013}), and performs safe, collision-free maneuvers. Formally, this can be 
+cast as the NP-hard Orienteering Problem (OP), a combination of the well-known Knapsack Problem and 
+Travelling Salesman Problem, which arises in numerous challenging applications~\cite{Vansteenwegen2011}. 
+Whereas approaches from the computer science community~\cite{Vansteenwegen2011, Chekuri2005} are geared 
+towards obtaining paths with theoretical optimality guarantees, IPP literature in robotics is largely 
+concerned with finding practical solutions to the OP with limited computational resources.
+
+As presented by~\citet{Lim2015}, there are two general categories of IPP algorithms in robotics: (i) 
+non-adaptive and (ii) adaptive. In non-adaptive planning, a sequence of sensing operations is computed in an 
+offline manner and then executed. In adaptive planning, new sensing operations are conditioned on the 
+outcomes of earlier ones, allowing paths to change online as new information is incorporated. The methods 
+proposed in this thesis will target the latter class to allow for safe, efficient navigation in unknown 
+environments with real-time considerations.
+
+The simplest approach to adaptive planning for active mapping is to rely on greedy one-step look-ahead 
+goals. \citet{Singh2010} use such a strategy to monitor spatio-temporal temperature distributions by setting 
+the next most informative predicted measurement as the target. For mapping cluttered environments, analogous 
+methods can be applied based on geometric frontiers~\cite{Yamauchi1997, Latombe2002, Bircher2016, Heng2014} 
+or visual targets~\cite{Kim2014}, whereas camera positions~\cite{Isler2016} are relevant candidates for 
+single-object scenes. In volumetric reconstruction, greedy viewpoint selection is also known as next-best 
+view planning~\cite{Connolly1985}. The main issue with this approach is that it is myopic: it does 
+not perform long-term reasoning and thus tends to get stuck in local minima~\cite{Lim2015, Charrow2015a}.
+
+Finite-horizon look-ahead searches~\cite{Lim2015, Hollinger2009, How2010} alleviate this weakness by 
+extending the measurement forecast. However, their efficiency depends heavily on the predictive heuristic and 
+the length of horizon used. \citet{Hitz2015} address this problem by making local modifications to a prior 
+global path. Alternatively, several recent methods~\cite{Kuntz2016, Charrow2015a, Heng2015} propose a 
+two-stage planning approach by combining configuration-based global exploration with local optimization to 
+procure the best aspects of both paradigms. In this set-up, \citet{Heng2015} use two distinct objective 
+functions accounting for efficient exploration and coverage of cluttered environments.
+
+Finally, a common general classification for path planners is based on their operation in (i) discrete or 
+(ii) continuous space. Discrete IPP algorithms~\cite{Chekuri2005, Hollinger2014, Binney2013} build upon the 
+static sensor problem~\cite{Krause2008} by performing combinatorial optimization over a grid. The main 
+drawbacks of such representations are their poor scalability and limited resolution. A less restrictive 
+method uses a library of motion primitives~\cite{Charrow2015a, Heng2015} to generate dynamically feasible 
+paths. Alternatively, continuous-space planning involves leveraging sampling-based 
+methods~\cite{Hollinger2014, Bircher2016, Jadidi2016} or splines~\cite{Hitz2015, Marchant2014}, without 
+requiring a pre-defined graph of measurement locations. The proposed research will consider planning with a 
+view towards continuous space to cater for smooth quadrotor dynamics~\cite{Richter2013}.

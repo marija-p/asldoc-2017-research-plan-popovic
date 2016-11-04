@@ -1,39 +1,69 @@
 \section{Introduction}
 \label{S:introduction}
 
+Autonomous mobile robots allow us to interact with our world in an unprecedented manner. Equipped 
+with modern sensors, such devices can collect valuable data in many practical scenarios, helping us better 
+understand surrounding environments and their evolution. Owing to recent advances in hardware, artificial 
+intelligence, and computational capabilities, information-gathering technologies are becoming more 
+common in a wide variety of applications, ranging from indoor spatial mapping~\cite{Charrow2015, 
+Heng2014} to outdoor environmental monitoring~\cite{Dunbabin2012, Detweiler2015}.
+
+Small rotary-wing micro aerial vehicles (MAVs), in particular, offer a timely and cost-effective method of 
+collecting high-resolution data in sensing applications. A combination of their flexibility, maneuverability, 
+and ability to fly at low altitudes~\cite{Anthony2014} permits more detailed inspections of dangerous or 
+hard-to-reach regions with greater coverage compared to conventional approaches generally based on manual 
+sampling or static sensor networks~\cite{Dunbabin2012, Krause2008, Phillips2012}. As a motivating example, 
+consider the problem of monitoring agricultural crops on a field. Here, it is necessary to model the 
+evolution of different interrelated physical variables~\cite{Cardina1997, Anthony2014, Detweiler2015} to 
+assess crop health and develop integrated workflows supporting sustainability and economic gain. 
+Unfortunately, traditional sampling campaigns often involve low-resolution aerial imagery~\cite{DeCastro2013} 
+or on-ground methods~\cite{Borra-Serrano2015}, which are expensive and inefficient. In agriculture and other 
+% industries, such as marine biology~\cite{Hitz2015, Singh2010, Jadidi2016}, structural 
+inspection~\cite{Isler2016,Bircher2016,Heng2015}, and search and rescue~\cite{Singh2009,Lim2015}, aerial 
+robots 
+emerge as a flexible, cost-efficient alternative for obtaining accurate maps with large spatio-temporal 
+coverage. Similar capabilities are also an important prerequisite for autonomous robots such as 
+self-driving cars that navigate in unstructured environments.
+
+However, mapping complex environments with mobile robots is a challenging problem. Often, 
+quantifying target processes requires managing a large amount of spatially and temporally diverse 
+data~\cite{Dunbabin2012}. Given a target environment, a robot can obtain sensor measurements to gain 
+information. In doing so, however, it incurs mobility cost in terms of fuel, energy, or time, which preclude 
+it from gathering data at arbitrary positions. Moreover, on-board sensing devices are often hard to recharge, 
+repair, or replace, posing limitations to their use \cite{Singh2009}. The problem faced thereby involves 
+trading off information gain and resource consumption efficiently to generate information-rich trajectories. 
+In doing so, the robot must also reconcile exploitation and exploration by deciding whether to improve local 
+parts of the map or visit unknown regions~\cite{Charrow2015a}.
+
+There is extensive prior work concerning path planning for exploration and 
+mapping using mobile robots. Nonetheless, algorithms to date have not fully leveraged the fidelity and speed 
+offered by modern sensing devices. One pressing issue is developing efficient representations to capture 
+large-scale spatio-temporal processes suitable for motion planning with informative measures. Another 
+challenge is scalability~\cite{Hollinger2014}, as evaluating candidate measurement locations for 
+high-dimensional, continuous configuration spaces can incur significant computational cost. In active 
+applications, a further important element is adaptivity, whereby new sensor measurements are conditioned 
+on the outcomes of earlier ones. This requirement complicates the decision-making process~\cite{Lim2015}. 
+Finally, an under-explored practical aspect is the portability of path planning algorithms 
+between different domains with similar set-ups, as most developments thus far have been 
+application-specific~\cite{Dunbabin2012}.
+
+The proposed thesis aims at providing solutions for informative path planning by addressing the research 
+gaps above. Within its scope, the key development will be a scalable, flexible framework for robotic 
+navigation in mapping applications. The expected scientific contributions will be within individual 
+modules of the planning pipeline. These are:
+
 \begin{itemize}
-  \item \emph{What is this research plan about?}
-  \item \emph{What are the (high-level) research gaps?}
-  \item \emph{What is the overall goal?}
+ \item A mapping framework that incorporates sensor data necessary for motion-based informative 
+planning, accounts for measurement uncertainty, and is extendable to unknown 3D environments,
+ \item An adaptive, informative planning method based on the environmental model which respects constraints 
+on the budget and device dynamics, and
+ \item The consideration of application-specific informative objectives within the planning framework.
 \end{itemize}
 
-\hrulefill
+The developed methods will be evaluated in two main scenarios: agricultural monitoring and industrial 
+inspection. However, they will be formalized in a generic manner such that they can be used in other 
+mapping applications.
 
-\begin{itemize}
- 
- \item Motivation: (scientific) importance of environmental monitoring spatio-temporal phenomena 
-\cite{Detweiler2015, Hitz2015}
- \item Example applications: exploring oceans, studying volcanoes, surveying agricultural fields
-\unsure{How application-specific should this be? e.g. monitoring fields vs monitoring in general} 
-\unsure{Should I focus on 
-one application for the plan?}
- \item Large-scale environmental monitoring is becoming more relevant: focus on saving resources and 
-understanding natural disasters/climate change and its implications
-
- \item Advantages of using autonomous systems over manual procedures \cite{Detweiler2015}: increase data 
-collection efficiency, can be cheaper, more flexible
- 
- \item Current research gaps ($\rightarrow$ connect to related work sections)
- \begin{itemize}
-  \item Planning paths for efficient data-gathering given constraints (vehicle mobility, time, fuel)
-  \item Adaptive sampling
-  \item Operational issues, cooperative planning?
- \end{itemize}
-
- \item The proposed research aims at providing (IPP) solutions for environmental monitoring using aerial 
-robots \unsure{Be more specific.}
- \item Section \ref{S:related_work} of this research plan overviews related work in the field. The proposed 
-approach, and its scientific contributions, are detailed in Section \ref{S:proposed_approach}. Finally, 
+Section \ref{S:related_work} of this research plan overviews related work in the field. The proposed 
+approach is detailed in Section \ref{S:proposed_approach}. Finally, 
 Section \ref{S:time_schedule} outlines the planned time schedule of the thesis.
- 
-\end{itemize}
