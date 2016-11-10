@@ -1,7 +1,7 @@
 \section{Related Work}
 \label{S:related_work}
 
-This section reviews related work in the field of informative path planning (IPP), which is the focus of 
+This section surveys related work in the field of informative path planning (IPP), which is the focus of 
 this thesis. Generally, IPP solvers are composed of three main ingredients: 
 
 \begin{itemize}
@@ -20,7 +20,7 @@ In autonomous data collection with mobile robots, a key challenge is planning pa
 processes while respecting sensing and mobility constraints. This problem is known as informative 
 path planning (IPP)~\cite{Singh2009} and has been studied extensively in the context of robotics and 
 related fields. Unlike in distance-based planning, where the goal is typically to find a shortest 
-route between two locations~\cite{Dijkstra1959}, the paths in IPP are subject to a budget constraint 
+route between two locations~\cite{Dijkstra1959}, paths in IPP are subject to a budget constraint 
 which limits the number of informative measurements that can be taken. The measures used to quantify 
 utility are often submodular~\cite{Krause2011}, meaning that the amount of information gathered in the 
 future is dependent on the prior trajectory. Hence, IPP can be viewed as procuring active 
@@ -39,7 +39,7 @@ A simplification of IPP, the NP-hard sensor placement task~\cite{Krause2008} add
 informative 
 measurement sites in a static setting. Model-aided IPP builds upon this problem by considering a sequence 
 of informed decisions a mobile agent must make to retrieve an accurate model of the environment of interest. 
-In its core, an IPP scheme thus requires a mapping framework to capture sensor measurements compactly, an 
+Within its core, an IPP scheme thus requires a mapping framework to capture sensor measurements compactly, an 
 objective function to quantify their utility based on the map, and a planning algorithm to generate feasible 
 paths combining the map and objective.
 
@@ -49,8 +49,8 @@ In IPP, a model of the target environment is necessary to predict the utility of
 measurements and capture its transversability. This model can be built from previous measurements and 
 \textit{a priori} knowledge, if available, and updated incrementally by registering sensor data. Typically, 
 the map representation depends on the dimensionality of the environment as well as the nature of measurements 
-obtained. As in most other approaches, the proposed framework focuses on a probabilistic class of models to 
-account for sensor uncertainties.
+obtained. Following most other approaches, the proposed framework focuses on a probabilistic class of models 
+to account for sensing uncertainty.
 
 Occupancy grids are the most commonly-used type of map representation for spatial sensing in 
 2D with uncorrelated measurements~\cite{Elfes1989}. This model has been distinguished for its 
@@ -66,8 +66,9 @@ distinguishing unknown areas for exploration. Several recent
 works~\cite{Heng2015,Bircher2016,Charrow2015a,Isler2016} have considered this IPP set-up for single- 
 and multi-object volumetric reconstruction and inspection. \citet{Nelson2015} present an alternative 
 compression framework to achieve the same goal, while~\citet{Oleynikova2016} discuss the 
-benefits of encoding gradient information for local planning. The proposed thesis will pursue these research 
-directions by considering efficient 3D representations for planning both informative and dynamically 
+benefits of encoding gradient information for local collision-free planning. The proposed thesis will pursue 
+these research directions by considering efficient 3D representations for planning both informative and 
+dynamically 
 feasible paths.
 
 Often, information-gathering requires capturing complex processes with multiple influences. This 
@@ -88,9 +89,9 @@ consider 2D surfaces. In cluttered environments,~\citet{OCallaghan2012} extend t
 GP-based planning, however, remain model scalability and the integration of dense data from multiple sensors 
 for planning in more complex environments.
 
-Finally, some recent works have presented novel approaches to modeling, such as the topic 
+Finally, some recent works have presented novel modeling approaches, such as the topic 
 summarization technique of~\citet{Girdhar2015}. Although this thesis will focus on extending traditional 
-methods, it is still interesting to consider alternatives as a basis for comparison.
+methods, it is still interesting to consider such alternatives as a basis for comparison.
 
 \subsection{Utility function}
 Information-gain based mapping strategies seek to optimize a utility function reflecting the mission 
@@ -103,7 +104,7 @@ entropy~\cite{Cover2006, Lim2015, Bourgault2002, Yang2014} quantifying the map u
 its representation. To address the issue of submodularity, or diminishing returns, several methods have been 
 proposed that maximize mutual information, which predicts the impact of future sensor measurements on the 
 available map~\cite{Hitz2015, Hollinger2014, Krause2008}. \citet{Charrow2015a} and~\citet{Carrillo2015a} 
-discuss related criteria for more efficient 3D mapping. In reconstruction from imagery, it is also common to 
+discuss related criteria for more efficient 3D mapping. In reconstruction from imagery, it is common to 
 simply count the number of voxels observable from a given camera position, weighting them 
 accordingly~\cite{Bircher2016, Isler2016, Heng2015}. These measures encode pure exploratory aims, with the 
 advantage of being readily available from the environmental models discussed above.

@@ -18,7 +18,7 @@ evolution of different interrelated physical variables~\cite{Cardina1997, Anthon
 assess crop health and develop integrated workflows supporting sustainability and economic gain. 
 Unfortunately, traditional sampling campaigns often involve low-resolution aerial imagery~\cite{DeCastro2013} 
 or on-ground methods~\cite{Borra-Serrano2015}, which are expensive and inefficient. In agriculture and other 
-% industries, such as marine biology~\cite{Hitz2015, Singh2010, Jadidi2016}, structural 
+industries, such as marine biology~\cite{Hitz2015, Singh2010, Jadidi2016}, structural 
 inspection~\cite{Isler2016,Bircher2016,Heng2015}, and search and rescue~\cite{Singh2009,Lim2015}, aerial 
 robots 
 emerge as a flexible, cost-efficient alternative for obtaining accurate maps with large spatio-temporal 
@@ -37,7 +37,8 @@ parts of the map or visit unknown regions~\cite{Charrow2015a}.
 
 There is extensive prior work concerning path planning for exploration and 
 mapping using mobile robots. Nonetheless, algorithms to date have not fully leveraged the fidelity and speed 
-offered by modern sensing devices. One pressing issue is developing efficient representations to capture 
+offered by modern sensing devices~\cite{Alterovitz2015}. One pressing issue is developing efficient 
+representations to capture 
 large-scale spatio-temporal processes suitable for motion planning with informative measures. Another 
 challenge is scalability~\cite{Hollinger2014}, as evaluating candidate measurement locations for 
 high-dimensional, continuous configuration spaces can incur significant computational cost. In active 
@@ -50,7 +51,9 @@ application-specific~\cite{Dunbabin2012}.
 The proposed thesis aims at providing solutions for informative path planning by addressing the research 
 gaps above. Within its scope, the key development will be a scalable, flexible framework for robotic 
 navigation in mapping applications. The expected scientific contributions will be within individual 
-modules of the planning pipeline. These are:
+modules of the planning pipeline.
+
+These are:
 
 \begin{itemize}
  \item A mapping framework that incorporates sensor data necessary for motion-based informative 
@@ -60,8 +63,8 @@ on the budget and device dynamics, and
  \item The consideration of application-specific informative objectives within the planning framework.
 \end{itemize}
 
-The developed methods will be evaluated in two main scenarios: agricultural monitoring and industrial 
-inspection. However, they will be formalized in a generic manner such that they can be used in other 
+The developed methods will be evaluated in two main scenarios: agricultural monitoring and indoor 
+exploration. However, they will be formalized in a generic manner such that they can be used in other 
 mapping applications.
 
 Section \ref{S:related_work} of this research plan overviews related work in the field. The proposed 

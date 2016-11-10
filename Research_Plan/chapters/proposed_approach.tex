@@ -1,19 +1,87 @@
 \section{Proposed Approach}
 \label{S:proposed_approach}
 
-\subsection{A subtopic}
-\begin{itemize}
-	\item \emph{What approach will be used?}
-	\item \emph{Why is the approach promising?}
-	\item \emph{What are the expected results?}
-\end{itemize}
+The proposed research will focus on developing an IPP framework for a mobile agent 
+performing active exploration and mapping. This framework will be formulated in a 
+generic manner, based on the decomposition in Section~\ref{S:related_work}, to allow for portability between 
+different applications. In this thesis, the developments will be driven by and evaluated for a MAV in two 
+representative use-cases: (3.1) Agricultural monitoring and (3.2) Indoor exploration.  As outlined in the 
+following sub-sections, the progress for each set-up will be split into stages based on its associated work 
+packages.
 
-\hrulefill
+\subsection{Agricultural Monitoring}
 
-The proposed research will focus on developing an informative path planning framework, able to ...
+Agricultural monitoring was chosen as a environmental use-case for IPP that 
+has gauged significant interest over the past few years~\cite{Detweiler2015, Cardina1997, Anthony2014}. 
+In particular, the proposed research will focus on the problem of active weed classification using a 
+MAV: a subject of several recent related works~\cite{Vivaldini2016, Sadat2015}. The MAV is 
+equipped with a specialized weed classifier unit supplying sensor measurements. Generally, this task can be 
+formulated as a 2.5D problem involving the 
+search for most informative measurement locations in a 3D configuration space over a 2D environmental model 
+(farmland). Here, a key trade-off arises because the same point can be observed from different altitudes; thus 
+the planning unit must account for degrading sensor accuracy with increased altitude and coverage. Moreover, 
+it must given limited battery and computational capacities.
 
-\unsure{Which key points from Related Works am I addressing?}
+\subsubsection{Phase 1}
 
-\subsection{Intelligent environmental monitoring}
+The first phase of the research will aim to establish an efficient problem set-up and procure 
+preliminary results. Initially, the weed classifier will be a heuristically tuned probabilistic sensor model 
+providing uncorrelated point measurements and reflecting the altitude dependency discussed above. The main 
+contribution will be a viewpoint-based planning algorithm that accounts for this trade-off and generates 
+dynamically feasible paths for the MAV. The developed framework will be modular; as such, different 
+informative objectives and planning methods will be evaluated. Experiments will be conducted in simulation and 
+on a real platform using artificial weed distributions.
 
-Work in progress.
+\subsubsection{Phase 2}
+
+In the second phase, the project will focus on integrating the IPP framework with a real classifier sensor 
+model 
+and refining its elements accordingly. In particular, the 
+environmental model will be improved to capture agricultural expert knowledge involving correlations in 
+weed distributions and accept prior data~\cite{Pena2013}. As well as demonstrating the flexibility of the 
+proposed framework, this phase will be an important step towards practical MAV applications in agriculture.
+
+\subsubsection{Phase 3}
+
+The final phase of the project will be oriented towards developing a fully integrated system for field 
+experiments with real weeds and outdoor state estimation. A local obstacle collision avoidance module will 
+also be incorporated. The framework will be evaluated thoroughly with 
+respect to various planning objectives and approaches, as well as compared to state-of-the-art approaches.
+
+As outlined in Section~\ref{S:time_schedule}, the developments for this application will be in line with Work 
+Package 3: UAV Navigation for the Horizon 2020 project, Flourish.
+
+\subsection{Indoor exploration}
+
+The second use-case will be a generic indoor exploration problem for a MAV relying on vision-based 
+sensing, which covers a range of inspection and reconstruction scenarios, including those arising in mining, 
+construction, and search and rescue. The aim is to solve the problem of exploring an unknown 3D space by 
+autonomously constructing a map as efficiently and quickly as possible. This task has been tackled in several 
+recent works~\cite{Charrow2015a, Bircher2016, Heng2015}, widely differing in their approaches. In addition to 
+planning with constraints on battery and computational capacities, open questions remain in defining suitable 
+objective functions over an efficient volumetric representation of space and planning safe, obstacle-free 
+paths based on this model. All following developments will be thoroughly evaluated in experimental set-ups.
+
+\subsubsection{Phase 1}
+
+The first phase of the research will aim to establish a scalable environmental model for planning by 
+extending the approaches from the agricultural monitoring use-case to 3D. The planning algorithm will 
+combine elements of global viewpoint-based planning and local optimization to cater for the dynamic 
+feasibility of the MAV. Initially, a primitive collision avoidance module will be used based on simplifying 
+assumptions of unknown space. Different informative objectives and planning methods will be investigated.
+
+\subsubsection{Phase 2}
+
+The second phase will focus on extending the environmental model to provide a foundation for more 
+complex decision-making. In particular, the relationship between global and local 
+planning for safe operation with respect to the map representation will be considered. To achieve this, 
+aspects of multi-objective optimization will be integrated into the framework. A thorough analysis of new 
+features and their effects will be carried out.
+
+\subsubsection{Phase 3}
+
+In the final phase, the fully integrated system will be evaluated against benchmarks with a view 
+towards the fidelity of volumetric reconstructions obtained. Time-permitting, this phase will investigate the 
+possibility of incorporating elements of active SLAM to account for MAV state uncertainty. Combining the work 
+from the two use-cases, the IPP framework will be fully documented and released open-source. 
+Possible future research directions will also be thoroughly discussed.
